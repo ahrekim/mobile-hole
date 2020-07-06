@@ -1,0 +1,7 @@
+{
+  "name": "mobile-hole",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Dashboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Tab 1</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div id="container">
+    <div *ngIf="generalData">
+      <ion-card>
+        <div *ngIf="isChecked">
+          <ion-icon class="status-icon" color="success" name="shield-checkmark-outline"></ion-icon>
+          <br>
+          <ion-badge color="success">Ads are being blocked</ion-badge>
+        </div>
+        <div *ngIf="!isChecked">
+          <ion-icon v-else class="status-icon" color="danger" name="shield-outline"></ion-icon>
+          <br>
+          <ion-badge color="danger">Ads are not being blocked</ion-badge>
+        </div>
+        <ion-list>
+          <ion-item>
+            <ion-title>
+              Toggle ads (PWHASH Required)
+            </ion-title>
+            <ion-toggle [(ngModel)]="isChecked" (click)="updateStatus()"></ion-toggle>
+          </ion-item>
+        </ion-list>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Ads percentage today</ion-card-subtitle>
+          <ion-card-title>{{generalData.ads_percentage_today}} %</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Queries today</ion-card-subtitle>
+          <ion-card-title>{{generalData.dns_queries_today}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Ads blocked today</ion-card-subtitle>
+          <ion-card-title>{{generalData.ads_blocked_today}}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </div>
+    <ion-card *ngIf=!generalData>
+      Make sure the IP Address for the Pi-Hole is set in settings. If you Provide the PWHASH and Pi-Hole IP from Settings you can control blocking status 
+    </ion-card>
+  </div>
+
+</ion-content>
